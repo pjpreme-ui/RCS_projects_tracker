@@ -154,7 +154,12 @@ html {
 <div class="header">
   <div class="header-left">
     <h1>RCS — Project Tracker</h1>
-    <p>อัปเดตล่าสุด: 14/3/2026</p>
+   <p>อัปเดตล่าสุด: <span id="current-date"></span></p>
+<script>
+    const d = new Date();
+    const dateStr = d.getDate() + '/' + (d.getMonth()+1) + '/' + d.getFullYear();
+    document.getElementById('current-date').innerHTML = dateStr;
+</script>
   </div>
   <div class="summary-pills">
     <span class="pill pill-total">รวม 8 เรื่อง</span>
