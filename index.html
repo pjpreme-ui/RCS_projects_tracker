@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>RCS Project Tracker — Auto Calculation</title>
+<title>RCS Project Tracker — Full Links & Auto Calc</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600&display=swap');
   html { font-size: 150%; }
@@ -18,70 +18,37 @@
     --gray-bg: rgba(0,0,0,0.04); --radius: 10px;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    background: var(--bg); color: var(--text);
-    font-family: 'IBM Plex Sans Thai', system-ui, sans-serif;
-    font-size: 14px; line-height: 1.6; min-height: 100vh; padding: 32px 24px 60px;
-  }
-  .header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 28px; flex-wrap: wrap; gap: 16px; }
+  body { background: var(--bg); color: var(--text); font-family: 'IBM Plex Sans Thai', sans-serif; font-size: 14px; line-height: 1.6; padding: 32px 24px 60px; }
+  .header { display: flex; justify-content: space-between; margin-bottom: 28px; flex-wrap: wrap; gap: 16px; }
   .header-left h1 { font-size: 20px; font-weight: 600; letter-spacing: -0.2px; }
-  .header-left p { color: var(--text-muted); font-size: 12px; margin-top: 3px; }
   .summary-pills { display: flex; gap: 7px; flex-wrap: wrap; }
-  .pill { padding: 4px 11px; border-radius: 20px; font-size: 12px; font-weight: 500; border: 1px solid transparent; }
-  .pill-total { background: var(--surface2); color: var(--text-muted); border-color: var(--border2); }
-  .pill-done { background: var(--green-bg); color: var(--green); border-color: rgba(45,158,104,0.25); }
-  .pill-wip { background: var(--amber-bg); color: var(--amber); border-color: rgba(176,110,16,0.25); }
-  .pill-todo { background: var(--gray-bg); color: var(--text-muted); border-color: var(--border); }
-  .progress-wrap {
-    background: var(--surface); border: 1px solid var(--border);
-    border-radius: var(--radius); padding: 14px 20px; margin-bottom: 24px;
-    display: flex; align-items: center; gap: 14px; box-shadow: 0 1px 4px rgba(0,0,0,0.05);
-  }
-  .progress-label { font-size: 12px; color: var(--text-muted); white-space: nowrap; }
+  .pill { padding: 4px 11px; border-radius: 20px; font-size: 12px; font-weight: 500; border: 1px solid var(--border2); }
+  .pill-total { background: var(--surface2); color: var(--text-muted); }
+  .pill-done { background: var(--green-bg); color: var(--green); }
+  .pill-wip { background: var(--amber-bg); color: var(--amber); }
+  .progress-wrap { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 20px; margin-bottom: 24px; display: flex; align-items: center; gap: 14px; box-shadow: 0 1px 4px rgba(0,0,0,0.05); }
   .progress-bar-outer { flex: 1; height: 6px; background: var(--surface2); border-radius: 3px; overflow: hidden; }
-  .progress-bar-inner { height: 100%; border-radius: 3px; background: linear-gradient(90deg, var(--green), #1a9070); transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
-  .progress-pct { font-size: 13px; font-weight: 600; color: var(--green); white-space: nowrap; }
+  .progress-bar-inner { height: 100%; background: linear-gradient(90deg, var(--green), #1a9070); transition: width 0.6s ease; }
   .projects { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
   @media (max-width: 640px) { .projects { grid-template-columns: 1fr; } }
   .project-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.05); }
-  .project-header { padding: 12px 16px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; gap: 10px; }
-  .project-header.purple { background: var(--purple-bg); border-bottom-color: rgba(83,74,183,0.15); }
-  .project-header.teal { background: var(--teal-bg); border-bottom-color: rgba(15,110,86,0.15); }
-  .project-name { font-weight: 600; font-size: 13px; }
-  .project-header.purple .project-name { color: var(--purple); }
-  .project-header.teal .project-name { color: var(--teal); }
-  .project-count { font-size: 11px; color: var(--text-muted); background: var(--surface2); padding: 2px 8px; border-radius: 10px; border: 1px solid var(--border); }
-  .items { padding: 4px 0; }
-  .item { display: flex; align-items: flex-start; gap: 10px; padding: 9px 16px; border-bottom: 1px solid var(--border); transition: background 0.12s; }
-  .item:last-child { border-bottom: none; }
-  .item:hover { background: var(--surface2); }
-  .item-dot { width: 7px; height: 7px; border-radius: 50%; margin-top: 5px; flex-shrink: 0; }
-  .dot-green { background: var(--green); }
-  .dot-amber { background: var(--amber); }
-  .dot-gray { background: var(--text-dim); }
-  .item-body { flex: 1; min-width: 0; }
-  .item-title { font-size: 13px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .item-status { font-size: 11px; margin-top: 1px; }
-  .status-green { color: var(--green); }
-  .status-amber { color: var(--amber); }
-  .status-gray { color: var(--text-muted); }
-  .item-badge { font-size: 10px; padding: 2px 7px; border-radius: 8px; white-space: nowrap; flex-shrink: 0; margin-top: 2px; font-weight: 500; }
-  .badge-green { background-color: #d4edda !important; color: #155724 !important; border: 1px solid #c3e6cb; }
-  .badge-amber { background-color: #fff3cd !important; color: #856404 !important; border: 1px solid #ffeeba; }
-  .badge-gray { background-color: var(--gray-bg) !important; color: var(--text-muted) !important; border: 1px solid var(--border); }
-  .detail-section { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.05); }
-  .detail-header { padding: 10px 18px; border-bottom: 1px solid var(--border); font-size: 11px; font-weight: 600; letter-spacing: 0.07em; color: var(--text-muted); text-transform: uppercase; background: var(--surface2); }
+  .project-header { padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); }
+  .project-header.teal { background: var(--teal-bg); color: var(--teal); }
+  .project-header.purple { background: var(--purple-bg); color: var(--purple); }
+  .project-count { font-size: 11px; background: rgba(255,255,255,0.5); padding: 2px 8px; border-radius: 10px; border: 1px solid rgba(0,0,0,0.05); }
+  .item { display: flex; gap: 10px; padding: 12px 16px; border-bottom: 1px solid var(--border); }
+  .item-badge { font-size: 10px; padding: 2px 7px; border-radius: 8px; font-weight: 600; height: fit-content; }
+  .badge-green { background: #d4edda; color: #155724; }
+  .badge-amber { background: #fff3cd; color: #856404; }
+  .badge-gray { background: var(--gray-bg); color: var(--text-muted); }
+  .link-details { margin-top: 10px; font-size: 0.85em; background: #fafafa; padding: 10px; border-radius: 6px; border: 1px solid #eee; }
+  .detail-section { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
   table { width: 100%; border-collapse: collapse; }
-  thead th { padding: 9px 18px; text-align: left; font-size: 11px; font-weight: 500; color: var(--text-muted); border-bottom: 1px solid var(--border); background: var(--surface2); }
-  tbody tr { border-bottom: 1px solid var(--border); transition: background 0.1s; }
-  td { padding: 9px 18px; font-size: 12.5px; vertical-align: middle; }
-  .td-project { color: var(--text-muted); font-size: 11px; }
-  .td-date { color: var(--text-muted); font-size: 11px; white-space: nowrap; }
-  .status-tag { display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; border-radius: 10px; font-size: 11px; font-weight: 500; }
+  thead { background: var(--surface2); }
+  th, td { padding: 12px 18px; text-align: left; font-size: 12.5px; border-bottom: 1px solid var(--border); }
+  .status-tag { padding: 2px 8px; border-radius: 10px; font-size: 11px; font-weight: 500; }
   .tag-green { background: var(--green-bg); color: var(--green); }
   .tag-amber { background: var(--amber-bg); color: var(--amber); }
-  .tag-gray { background: var(--gray-bg); color: var(--text-muted); }
-  .status-tag::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: currentColor; }
 </style>
 </head>
 <body>
@@ -92,46 +59,68 @@
     <p>อัปเดตล่าสุด: <span id="current-date"></span></p>
   </div>
   <div class="summary-pills">
-    <span class="pill pill-total" id="sum-total">รวม - เรื่อง</span>
+    <span class="pill pill-total" id="sum-total">รวม -</span>
     <span class="pill pill-done" id="sum-done">✓ สำเร็จ -</span>
-    <span class="pill pill-wip" id="sum-wip">● กำลังดำเนินการ -</span>
-    <span class="pill pill-todo" id="sum-todo">○ ยังไม่เริ่ม -</span>    
+    <span class="pill pill-wip" id="sum-wip">● ดำเนินการ -</span>
   </div>
 </div>
 
 <div class="progress-wrap">
-  <span class="progress-label">ความคืบหน้าโดยรวม</span>
-  <div class="progress-bar-outer">
-    <div class="progress-bar-inner" id="main-progress-bar" style="width: 0%"></div>
-  </div>
-  <span class="progress-pct" id="main-progress-text">0%</span>
+  <span style="font-size: 12px; color: var(--text-muted);">Progress</span>
+  <div class="progress-bar-outer"><div class="progress-bar-inner" id="main-progress-bar"></div></div>
+  <span id="main-progress-text" style="font-weight:600; color:var(--green);">0%</span>
 </div>
 
 <div class="projects">
   <div class="project-card">
-    <div class="project-header purple">
-      <span class="project-name">Tech Now by NSTDA</span>
+    <div class="project-header teal">
+      <span>Influvation</span>
       <span class="project-count">-/- เรื่อง</span>
     </div>
     <div class="items">
       <div class="item">
-        <div class="item-dot dot-green"></div>
-        <div class="item-body">
-          <div class="item-title">ตอน 1 — PM 2.5 สวทช.</div>
-          <div class="item-status status-green">เผยแพร่แล้ว 11/3/2026</div>
-          <div style="margin-top: 15px; font-family: sans-serif; font-size: 0.85em;">
-            <p style="font-weight: bold; color: #333; margin-bottom: 8px;">🔗 รายการลิงก์ข่าวประชาสัมพันธ์:</p>
-            <details style="margin-bottom: 5px; border: 1px solid #e0e0e0; border-radius: 5px; padding: 5px;">
-              <summary style="cursor: pointer; font-weight: bold; color: #2e7d32; font-size: 1.1em;">กลุ่มที่ 1: สำนักข่าวหลักและสื่อกระแสหลัก (3)</summary>
-              <ul style="margin: 5px 0; padding-left: 20px;">
+        <div style="flex:1;"><b>ตอน 1.1 — Low Carbon NAC2026 (แถลงข่าว)</b><br><small>โพสต์ภาพแล้ว 10/3/2026</small>
+          <div style="margin-top:10px;"><img src="preEP1_influ_tanglak.png" style="width:100%; max-width:200px; border-radius:4px; border:1px solid #ddd;"></div>
+        </div>
+        <span class="item-badge badge-green">Done</span>
+      </div>
+      <div class="item">
+        <div style="flex:1;">ตอน 1.2 — NAC2026 (วันงาน)<br><small>รอเสนอแผนงาน</small></div>
+        <span class="item-badge badge-amber">WIP</span>
+      </div>
+      <div class="item">
+        <div style="flex:1;">ตอน 2 — Adaptive Education Platform<br><small>เสนอรูปแบบ (มิ.ย.)</small></div>
+        <span class="item-badge badge-amber">WIP</span>
+      </div>
+      <div class="item">
+        <div style="flex:1;">ตอน 3 — นวัตกรรมเกษตร 4 ภาค<br><small>เสนอให้ KOL เลือก</small></div>
+        <span class="item-badge badge-amber">WIP</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="project-card">
+    <div class="project-header purple">
+      <span>Tech Now by NSTDA</span>
+      <span class="project-count">-/- เรื่อง</span>
+    </div>
+    <div class="items">
+      <div class="item">
+        <div style="flex:1;"><b>ตอน 1 — PM 2.5 สวทช.</b><br><small>เผยแพร่แล้ว 11/3/2026</small>
+          
+          <div class="link-details">
+            <p style="font-weight:bold; margin-bottom:5px;">🔗 ลิงก์ข่าวประชาสัมพันธ์:</p>
+            <details style="margin-bottom:5px;">
+              <summary style="cursor:pointer; color:#2e7d32;">กลุ่ม 1: สำนักข่าวหลัก (3)</summary>
+              <ul style="padding-left:15px;">
                 <li><a href="https://www.matichon.co.th/local/quality-life/news_5629822" target="_blank">Matichon</a></li>
                 <li><a href="https://backbone.mcot.net/backbone/th/news/list/148148" target="_blank">MCOT Backbone</a></li>
                 <li><a href="https://vnnthailand.com/27747/" target="_blank">VNN Thailand</a></li>
               </ul>
             </details>
-            <details style="margin-bottom: 5px; border: 1px solid #e0e0e0; border-radius: 5px; padding: 5px;">
-              <summary style="cursor: pointer; font-weight: bold; color: #1565c0; font-size: 1.1em;">กลุ่มที่ 2: สื่อธุรกิจ นวัตกรรม (5)</summary>
-              <ul style="margin: 5px 0; padding-left: 20px;">
+            <details style="margin-bottom:5px;">
+              <summary style="cursor:pointer; color:#1565c0;">กลุ่ม 2: สื่อธุรกิจ/นวัตกรรม (5)</summary>
+              <ul style="padding-left:15px;">
                 <li><a href="https://thaibizvision.com/archives/36198" target="_blank">Thai Biz Vision</a></li>
                 <li><a href="https://www.innolifethailand.com/?p=41319" target="_blank">Innolife Thailand</a></li>
                 <li><a href="https://www.bizfocusnews.com/2026/03/7-pm25.html" target="_blank">Biz Focus News</a></li>
@@ -139,18 +128,24 @@
                 <li><a href="https://www.innewsthailand.com/?p=62673" target="_blank">In News Thailand</a></li>
               </ul>
             </details>
-            <details style="margin-bottom: 5px; border: 1px solid #e0e0e0; border-radius: 5px; padding: 5px;">
-              <summary style="cursor: pointer; font-weight: bold; color: #ef6c00; font-size: 1.1em;">กลุ่มที่ 3: เว็บไซต์ข่าวทั่วไป (12)</summary>
-              <ul style="margin: 5px 0; padding-left: 20px; font-size: 0.9em;">
-                <li><a href="http://siamevent.com/all-event/?p=235553">Siam Event</a></li>
-                <li><a href="https://www.thinsiam.com/archives/229290">Thin Siam</a></li>
+            <details style="margin-bottom:5px;">
+              <summary style="cursor:pointer; color:#ef6c00;">กลุ่ม 3: เว็บไซต์ข่าวทั่วไป (12)</summary>
+              <ul style="padding-left:15px; font-size:0.9em;">
+                <li><a href="http://siamevent.com/all-event/?p=235553">Siam Event</a></li><li><a href="https://www.thinsiam.com/archives/229290">Thin Siam</a></li>
+                <li><a href="https://lifeandsciencenews.com/?p=33463">Life and Science News</a></li><li><a href="https://www.newsalive.net/education-research/science/news-665/">News Alive</a></li>
+                <li><a href="http://www.highlighthotnews.com/2026/03/7-pm25.html">Highlight Hot News</a></li><li><a href="https://www.asiannewschannel1.com/?p=45819">Asian News Channel 1</a></li>
+                <li><a href="https://www.hilightdd.com/news/4045">Hilight DD</a></li><li><a href="https://www.aseanallnews.com/2026/03/7-pm25.html?m=1">ASEAN All News</a></li>
+                <li><a href="https://www.thailandtimes.net/2026/03/7-pm25.html">Thailand Times</a></li><li><a href="http://www.tourfamuangthai.com/2026/03/7-pm25.html">Tour Fa Muang Thai</a></li>
+                <li><a href="http://www.patiewtourthai.com/2026/03/7-pm25.html">Pa Tiew Tour Thai</a></li><li><a href="https://www.bizthaipost.com/2026/03/5-food-ray-genius.html?m=1">Biz Thai Post</a></li>
               </ul>
             </details>
-            <details style="margin-bottom: 5px; border: 1px solid #e0e0e0; border-radius: 5px; padding: 5px;">
-              <summary style="cursor: pointer; font-weight: bold; color: #7b1fa2; font-size: 1.1em;">กลุ่มที่ 4: เครือข่ายข่าวทางเลือก (8)</summary>
-              <ul style="margin: 5px 0; padding-left: 20px; font-size: 0.9em;">
-                <li><a href="https://warasarnthai.blogspot.com/2026/03/7-pm25.html">Warasarn Thai</a></li>
-                <li><a href="https://khaoqnewss.blogspot.com/2026/03/7-pm25.html">Khao Q News</a></li>
+            <details>
+              <summary style="cursor:pointer; color:#7b1fa2;">กลุ่ม 4: ข่าวทางเลือก/Blog (8)</summary>
+              <ul style="padding-left:15px; font-size:0.9em;">
+                <li><a href="https://warasarnthai.blogspot.com/2026/03/7-pm25.html">Warasarn Thai</a></li><li><a href="https://khaoqnewss.blogspot.com/2026/03/7-pm25.html">Khao Q News</a></li>
+                <li><a href="https://siam-news-time.blogspot.com/2026/03/7-pm25.html">Siam News Time</a></li><li><a href="https://subjectofnews.blogspot.com/2026/03/7-pm25.html">Subject of News</a></li>
+                <li><a href="https://thailandnewbiz.blogspot.com/2026/03/7-pm25.html">Thailand New Biz</a></li><li><a href="https://saimupdatenews.blogspot.com/2026/03/7-pm25.html">Siam Update News</a></li>
+                <li><a href="https://bangkokmediazone.blogspot.com/2026/03/7-pm25.html">Bangkok Media Zone</a></li><li><a href="https://tantukkhao.blogspot.com/2026/03/7-pm25.html">Tan Tuk Khao</a></li>
               </ul>
             </details>
           </div>
@@ -158,163 +153,64 @@
         <span class="item-badge badge-green">Done</span>
       </div>
       <div class="item">
-        <div class="item-dot dot-amber"></div>
-        <div class="item-body">
-          <div class="item-title">ตอน 2 — Low Carbon (Product)</div>
-          <div class="item-status status-amber">ระหว่างส่งตรวจ/ออกแบบ</div>
-        </div>
+        <div style="flex:1;">ตอน 2 — Low Carbon (Product)<br><small>ส่งตรวจออกแบบ</small></div>
         <span class="item-badge badge-amber">WIP</span>
       </div>
       <div class="item">
-        <div class="item-dot dot-amber"></div>
-        <div class="item-body">
-          <div class="item-title">ตอน 3 — Low Carbon (Non-Product)</div>
-          <div class="item-status status-amber">กำลังดำเนินการ</div>
-        </div>
+        <div style="flex:1;">ตอน 3 — Low Carbon (Non-Product)</div>
         <span class="item-badge badge-amber">WIP</span>
       </div>
       <div class="item">
-        <div class="item-dot dot-gray"></div>
-        <div class="item-body">
-          <div class="item-title">ตอน 4 — สุขภาพ</div>
-          <div class="item-status status-gray">ยังไม่ดำเนินการ</div>
-        </div>
+        <div style="flex:1;">ตอน 4 — สุขภาพ</div>
         <span class="item-badge badge-gray">Todo</span>
       </div>
       <div class="item">
-        <div class="item-dot dot-gray"></div>
-        <div class="item-body">
-          <div class="item-title">ตอน 5 — สัตว์เลี้ยง</div>
-          <div class="item-status status-gray">ยังไม่ดำเนินการ</div>
-        </div>
+        <div style="flex:1;">ตอน 5 — สัตว์เลี้ยง</div>
         <span class="item-badge badge-gray">Todo</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="project-card">
-    <div class="project-header teal">
-      <span class="project-name">Influvation</span>
-      <span class="project-count">-/- เรื่อง</span>
-    </div>
-    <div class="items">
-      <div class="item">
-        <div class="item-dot dot-green"></div>
-        <div class="item-body">
-          <div class="item-title">ตอน 1.1 — Low Carbon NAC2026 (แถลงข่าว)</div>
-          <div class="item-status status-green">โพสต์ภาพแล้ว 10/3/2026</div>
-          <div style="margin-top: 15px; text-align: center;">
-            <a href="preEP1_influ_tanglak.png" target="_blank">
-                <img src="preEP1_influ_tanglak.png" style="width: 100%; max-width: 250px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.15);">
-            </a>
-          </div>
-        </div>
-        <span class="item-badge badge-green">Done</span>
-      </div>
-      <div class="item">
-        <div class="item-dot dot-amber"></div>
-        <div class="item-body">
-          <div class="item-title">ตอน 1.2 — NAC2026 (วันงาน)</div>
-          <div class="item-status status-amber">รอเสนอแผนงาน</div>
-        </div>
-        <span class="item-badge badge-amber">WIP</span>
-      </div>
-      <div class="item">
-        <div class="item-dot dot-amber"></div>
-        <div class="item-body">
-          <div class="item-title">ตอน 2 — Adaptive Education Platform</div>
-          <div class="item-status status-amber">เสนอรูปแบบ (มิ.ย.)</div>
-        </div>
-        <span class="item-badge badge-amber">WIP</span>
-      </div>
-      <div class="item">
-        <div class="item-dot dot-amber"></div>
-        <div class="item-body">
-          <div class="item-title">ตอน 3 — นวัตกรรมเกษตร 4 ภาค</div>
-          <div class="item-status status-amber">เสนอให้ KOL เลือก</div>
-        </div>
-        <span class="item-badge badge-amber">WIP</span>
       </div>
     </div>
   </div>
 </div>
 
 <div class="detail-section">
-  <div class="detail-header">รายละเอียดทั้งหมด</div>
   <table>
-    <thead>
-      <tr>
-        <th style="width:100px">โครงการ</th>
-        <th>เรื่อง</th>
-        <th style="width:170px">สถานะ</th>
-        <th style="width:100px">วันที่</th>
-      </tr>
-    </thead>
+    <thead><tr><th>โครงการ</th><th>เรื่อง</th><th>สถานะ</th><th>วันที่</th></tr></thead>
     <tbody>
-      <tr><td class="td-project">Tech Now</td><td>ตอน 1 — PM 2.5 สวทช.</td><td><span class="status-tag tag-green">เผยแพร่แล้ว</span></td><td class="td-date">11/3/2026</td></tr>
-      <tr><td class="td-project">Tech Now</td><td>ตอน 2 — Low Carbon (Product)</td><td><span class="status-tag tag-amber">ส่งตรวจออกแบบ</span></td><td class="td-date">—</td></tr>
-      <tr><td class="td-project">Tech Now</td><td>ตอน 3 — Low Carbon (Non-Product)</td><td><span class="status-tag tag-amber">กำลังดำเนินการ</span></td><td class="td-date">—</td></tr>
-      <tr><td class="td-project">Tech Now</td><td>ตอน 4 — สุขภาพ</td><td><span class="status-tag tag-gray">ยังไม่เริ่ม</span></td><td class="td-date">—</td></tr>
-      <tr><td class="td-project">Tech Now</td><td>ตอน 5 — สัตว์เลี้ยง</td><td><span class="status-tag tag-gray">ยังไม่เริ่ม</span></td><td class="td-date">—</td></tr>
-      <tr><td class="td-project">Influvation</td><td>ตอน 1.1 — NAC แถลงข่าว</td><td><span class="status-tag tag-green">โพสต์แล้ว</span></td><td class="td-date">10/3/2026</td></tr>
-      <tr><td class="td-project">Influvation</td><td>ตอน 1.2 — NAC วันงาน</td><td><span class="status-tag tag-amber">รอเสนอแผน</span></td><td class="td-date">—</td></tr>
-      <tr><td class="td-project">Influvation</td><td>ตอน 2 — Adaptive Education Platform</td><td><span class="status-tag tag-amber">เสนอรูปแบบ</span></td><td class="td-date">มิ.ย. 2026</td></tr>
-      <tr><td class="td-project">Influvation</td><td>ตอน 3 — นวัตกรรมเกษตร 4 ภาค</td><td><span class="status-tag tag-amber">เสนอ KOL</span></td><td class="td-date">—</td></tr>
+      <tr><td>Influvation</td><td>ตอน 1.1 — NAC แถลงข่าว</td><td><span class="status-tag tag-green">Done</span></td><td>10/3/2026</td></tr>
+      <tr><td>Influvation</td><td>ตอน 1.2 — NAC วันงาน</td><td><span class="status-tag tag-amber">WIP</span></td><td>—</td></tr>
+      <tr><td>Influvation</td><td>ตอน 2 — Adaptive Education Platform</td><td><span class="status-tag tag-amber">WIP</span></td><td>มิ.ย. 2026</td></tr>
+      <tr><td>Influvation</td><td>ตอน 3 — นวัตกรรมเกษตร 4 ภาค</td><td><span class="status-tag tag-amber">WIP</span></td><td>—</td></tr>
+      <tr><td>Tech Now</td><td>ตอน 1 — PM 2.5 สวทช.</td><td><span class="status-tag tag-green">Done</span></td><td>11/3/2026</td></tr>
+      <tr><td>Tech Now</td><td>ตอน 2 — Low Carbon (Product)</td><td><span class="status-tag tag-amber">WIP</span></td><td>—</td></tr>
+      <tr><td>Tech Now</td><td>ตอน 3 — Low Carbon (Non-Product)</td><td><span class="status-tag tag-amber">WIP</span></td><td>—</td></tr>
     </tbody>
   </table>
 </div>
 
-<div class="footer" style="margin-top: 30px; text-align: center; font-size: 11px; color: var(--text-dim);">
-    RCS Project Tracker · <span id="footer-date">อัปเดต 14/3/2026</span>
-</div>
-
-<button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" style="position: fixed; bottom: 20px; right: 20px; padding: 10px 15px; background: #2d3436; color: white; border: none; border-radius: 50px; cursor: pointer; box-shadow: 0 2px 10px rgba(0,0,0,0.2);">
-    ↑ กลับขึ้นบน
-</button>
-
 <script>
-  function calculateDashboard() {
-    // 1. ตั้งค่าวันที่ปัจจุบัน
+  function updateDashboard() {
     const d = new Date();
-    const dateStr = d.getDate() + '/' + (d.getMonth() + 1) + '/' + d.getFullYear();
-    document.getElementById('current-date').innerText = dateStr;
-    document.getElementById('footer-date').innerText = 'อัปเดต ' + dateStr;
+    document.getElementById('current-date').innerText = d.toLocaleDateString('th-TH');
+    
+    const all = document.querySelectorAll('.item').length;
+    const done = document.querySelectorAll('.badge-green').length;
+    const wip = document.querySelectorAll('.badge-amber').length;
+    
+    document.getElementById('sum-total').innerText = `รวม ${all} เรื่อง`;
+    document.getElementById('sum-done').innerText = `สำเร็จ ${done}`;
+    document.getElementById('sum-wip').innerText = `ดำเนินการ ${wip}`;
+    
+    const pct = all > 0 ? Math.round((done / all) * 100) : 0;
+    document.getElementById('main-progress-bar').style.width = pct + '%';
+    document.getElementById('main-progress-text').innerText = pct + '%';
 
-    // 2. ดึงข้อมูลรายการทั้งหมดในหน้า
-    const allItems = document.querySelectorAll('.item');
-    const doneItems = document.querySelectorAll('.item-badge.badge-green');
-    const wipItems = document.querySelectorAll('.item-badge.badge-amber');
-    const todoItems = document.querySelectorAll('.item-badge.badge-gray');
-
-    // 3. อัปเดตตัวเลขใน Pills ด้านบน
-    document.getElementById('sum-total').innerText = `รวม ${allItems.length} เรื่อง`;
-    document.getElementById('sum-done').innerText = `✓ สำเร็จ ${doneItems.length}`;
-    document.getElementById('sum-wip').innerText = `● กำลังดำเนินการ ${wipItems.length}`;
-    document.getElementById('sum-todo').innerText = `○ ยังไม่เริ่ม ${todoItems.length}`;
-
-    // 4. คำนวณเปอร์เซ็นต์ความคืบหน้าโดยรวม
-    const overallPct = allItems.length > 0 ? Math.round((doneItems.length / allItems.length) * 100) : 0;
-    const progressBar = document.getElementById('main-progress-bar');
-    const progressText = document.getElementById('main-progress-text');
-
-    progressBar.style.width = overallPct + '%';
-    progressText.innerText = overallPct + '%';
-
-    // 5. นับจำนวนแยกรายโครงการ (สำหรับ x/x ใน Card Header)
-    const cards = document.querySelectorAll('.project-card');
-    cards.forEach(card => {
-      const cardItems = card.querySelectorAll('.item').length;
-      const cardDone = card.querySelectorAll('.item-badge.badge-green').length;
-      const countLabel = card.querySelector('.project-count');
-      if (countLabel) {
-        countLabel.innerText = `${cardDone}/${cardItems} เรื่อง`;
-      }
+    document.querySelectorAll('.project-card').forEach(card => {
+      const cTotal = card.querySelectorAll('.item').length;
+      const cDone = card.querySelectorAll('.badge-green').length;
+      card.querySelector('.project-count').innerText = `${cDone}/${cTotal} เรื่อง`;
     });
   }
-
-  // เรียกใช้ฟังก์ชันทันทีที่หน้าเว็บโหลดเสร็จ
-  window.onload = calculateDashboard;
+  window.onload = updateDashboard;
 </script>
-
 </body>
 </html>
