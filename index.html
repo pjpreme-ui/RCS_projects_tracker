@@ -97,7 +97,6 @@
   .tag-amber { background: var(--amber-bg); color: var(--amber); }
   .tag-gray { background: var(--gray-bg); color: var(--text-muted); }
   .status-tag::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: currentColor; }
-  .footer { margin-top: 20px; text-align: center; font-size: 11px; color: var(--text-dim); }
 </style>
 </head>
 <body>
@@ -123,9 +122,9 @@
 <div class="progress-wrap">
   <span class="progress-label">ความคืบหน้าโดยรวม</span>
   <div class="progress-bar-outer">
-    <div class="progress-bar-inner" style="width:22%"></div>
+    <div class="progress-bar-inner" style="width:25%"></div>
   </div>
-  <span class="progress-pct">22%</span>
+  <span class="progress-pct">25%</span>
 </div>
 
 <div class="projects">
@@ -143,22 +142,37 @@
           <div style="margin-top: 15px; font-family: sans-serif; font-size: 0.85em;">
             <p style="font-weight: bold; color: #333; margin-bottom: 8px;">🔗 รายการลิงก์ข่าวประชาสัมพันธ์:</p>
             <details style="margin-bottom: 5px; border: 1px solid #e0e0e0; border-radius: 5px; padding: 5px;">
-                <summary style="cursor: pointer; font-weight: bold; color: #2e7d32; font-size: 1.1em;">กลุ่มที่ 1: สำนักข่าวหลักและสื่อกระแสหลัก (3)</summary>
-                <ul style="margin: 5px 0; padding-left: 20px;">
-                    <li><a href="https://www.matichon.co.th/local/quality-life/news_5629822" target="_blank">Matichon</a></li>
-                    <li><a href="https://backbone.mcot.net/backbone/th/news/list/148148" target="_blank">MCOT Backbone</a></li>
-                    <li><a href="https://vnnthailand.com/27747/" target="_blank">VNN Thailand</a></li>
-                </ul>
+              <summary style="cursor: pointer; font-weight: bold; color: #2e7d32;">กลุ่มที่ 1: สำนักข่าวหลัก (3)</summary>
+              <ul style="margin: 5px 0; padding-left: 20px;">
+                <li><a href="https://www.matichon.co.th/local/quality-life/news_5629822" target="_blank">Matichon</a></li>
+                <li><a href="https://backbone.mcot.net/backbone/th/news/list/148148" target="_blank">MCOT Backbone</a></li>
+                <li><a href="https://vnnthailand.com/27747/" target="_blank">VNN Thailand</a></li>
+              </ul>
             </details>
             <details style="margin-bottom: 5px; border: 1px solid #e0e0e0; border-radius: 5px; padding: 5px;">
-               <summary style="cursor: pointer; font-weight: bold; color: #1565c0; font-size: 1.1em;">กลุ่มที่ 2: สื่อเฉพาะทางธุรกิจ นวัตกรรม และการศึกษา (5)</summary>
-                <ul style="margin: 5px 0; padding-left: 20px; line-height: 1.6;">
-                    <li><a href="https://thaibizvision.com/archives/36198" target="_blank">Thai Biz Vision</a></li>
-                    <li><a href="https://www.innolifethailand.com/?p=41319" target="_blank">Innolife Thailand</a></li>
-                    <li><a href="https://www.bizfocusnews.com/2026/03/7-pm25.html" target="_blank">Biz Focus News</a></li>
-                    <li><a href="https://www.education4plus.com/2026/03/news-169/" target="_blank">Education 4 Plus</a></li>
-                    <li><a href="https://www.innewsthailand.com/?p=62673" target="_blank">In News Thailand</a></li>
-                </ul>
+              <summary style="cursor: pointer; font-weight: bold; color: #1565c0;">กลุ่มที่ 2: สื่อธุรกิจ/นวัตกรรม (5)</summary>
+              <ul style="margin: 5px 0; padding-left: 20px;">
+                <li><a href="https://thaibizvision.com/archives/36198" target="_blank">Thai Biz Vision</a></li>
+                <li><a href="https://www.innolifethailand.com/?p=41319" target="_blank">Innolife</a></li>
+                <li><a href="https://www.bizfocusnews.com/2026/03/7-pm25.html" target="_blank">Biz Focus</a></li>
+                <li><a href="https://www.education4plus.com/2026/03/news-169/" target="_blank">Education 4 Plus</a></li>
+                <li><a href="https://www.innewsthailand.com/?p=62673" target="_blank">In News Thailand</a></li>
+              </ul>
+            </details>
+            <details style="margin-bottom: 5px; border: 1px solid #e0e0e0; border-radius: 5px; padding: 5px;">
+              <summary style="cursor: pointer; font-weight: bold; color: #ef6c00;">กลุ่มที่ 3: เว็บไซต์ข่าวทั่วไป (12)</summary>
+              <ul style="margin: 5px 0; padding-left: 20px; font-size: 0.9em;">
+                <li><a href="http://siamevent.com/all-event/?p=235553" target="_blank">Siam Event</a></li>
+                <li><a href="https://www.thinsiam.com/archives/229290" target="_blank">Thin Siam</a></li>
+                <li>และอื่นๆ อีก 10 ลิงก์...</li>
+              </ul>
+            </details>
+            <details style="margin-bottom: 5px; border: 1px solid #e0e0e0; border-radius: 5px; padding: 5px;">
+              <summary style="cursor: pointer; font-weight: bold; color: #7b1fa2;">กลุ่มที่ 4: เครือข่ายข่าวทางเลือก (8)</summary>
+              <ul style="margin: 5px 0; padding-left: 20px; font-size: 0.9em;">
+                <li><a href="https://warasarnthai.blogspot.com/2026/03/7-pm25.html" target="_blank">Warasarn Thai</a></li>
+                <li>และอื่นๆ อีก 7 ลิงก์...</li>
+              </ul>
             </details>
           </div>
         </div>
@@ -175,7 +189,7 @@
       <div class="item">
         <div class="item-dot dot-amber"></div>
         <div class="item-body">
-          <div class="item-title">ตอน 3 — Low Carbon และ Carbon Neutrality (Non-Product)</div>
+          <div class="item-title">ตอน 3 — Low Carbon (Non-Product)</div>
           <div class="item-status status-amber">กำลังดำเนินการ</div>
         </div>
         <span class="item-badge badge-amber">WIP</span>
@@ -208,12 +222,11 @@
       <div class="item">
         <div class="item-dot dot-green"></div>
         <div class="item-body">
-          <div class="item-title">ตอน 1.1 — Low Carbon NAC2026 (แถลงข่าว)</div>
-          <div class="item-status status-green">โพสต์แคปชัน+ภาพแล้ว 10/3/2026</div>
-          <div style="margin-top: 15px; text-align: center;">
-            <p style="font-size: 0.9em; color: #666; margin-bottom: 5px;">🖼️ ภาพสรุปกิจกรรม (คลิกเพื่อดูรูปใหญ่)</p>
+          <div class="item-title">ตอน 1.1 — Low Carbon NAC2026</div>
+          <div class="item-status status-green">โพสต์ภาพแล้ว 10/3/2026</div>
+          <div style="margin-top: 10px; text-align: center;">
             <a href="preEP1_influ_tanglak.png" target="_blank">
-                <img src="preEP1_influ_tanglak.png" style="width: 100%; max-width: 300px; border-radius: 12px; box-shadow: 0 4px 8px rgba(0,0,0,0.15);">
+              <img src="preEP1_influ_tanglak.png" style="width: 100%; max-width: 250px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.1);">
             </a>
           </div>
         </div>
@@ -222,16 +235,16 @@
       <div class="item">
         <div class="item-dot dot-amber"></div>
         <div class="item-body">
-          <div class="item-title">ตอน 1.2 — Low Carbon NAC2026 (วันงาน)</div>
-          <div class="item-status status-amber">รอเสนอแผนการทำงาน</div>
+          <div class="item-title">ตอน 1.2 — NAC2026 (วันงาน)</div>
+          <div class="item-status status-amber">รอเสนอแผนงาน</div>
         </div>
         <span class="item-badge badge-amber">WIP</span>
       </div>
       <div class="item">
         <div class="item-dot dot-amber"></div>
         <div class="item-body">
-          <div class="item-title">ตอน 2 — Adaptive Education Platform</div>
-          <div class="item-status status-amber">เสนอรูปแบบ comp day (มิ.ย.)</div>
+          <div class="item-title">ตอน 2 — Adaptive Education</div>
+          <div class="item-status status-amber">เสนอรูปแบบ (มิ.ย.)</div>
         </div>
         <span class="item-badge badge-amber">WIP</span>
       </div>
@@ -259,69 +272,22 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td class="td-project">Tech Now</td>
-        <td>ตอน 1 — PM 2.5 สวทช.</td>
-        <td><span class="status-tag tag-green">เผยแพร่แล้ว</span></td>
-        <td class="td-date">11/3/2026</td>
-      </tr>
-      <tr>
-        <td class="td-project">Tech Now</td>
-        <td>ตอน 2 — Low Carbon (Product)</td>
-        <td><span class="status-tag tag-amber">ปรับแก้คอนเทนต์</span></td>
-        <td class="td-date">—</td>
-      </tr>
-      <tr>
-        <td class="td-project">Tech Now</td>
-        <td>ตอน 3 — Low Carbon (Non-Product)</td>
-        <td><span class="status-tag tag-amber">กำลังดำเนินการ</span></td>
-        <td class="td-date">—</td>
-      </tr>
-      <tr>
-        <td class="td-project">Tech Now</td>
-        <td>ตอน 4 — สุขภาพ</td>
-        <td><span class="status-tag tag-gray">ยังไม่ดำเนินการ</span></td>
-        <td class="td-date">—</td>
-      </tr>
-      <tr>
-        <td class="td-project">Tech Now</td>
-        <td>ตอน 5 — สัตว์เลี้ยง</td>
-        <td><span class="status-tag tag-gray">ยังไม่ดำเนินการ</span></td>
-        <td class="td-date">—</td>
-      </tr>
-      <tr>
-        <td class="td-project">Influvation</td>
-        <td>ตอน 1.1 — Low Carbon NAC2026 (แถลงข่าว)</td>
-        <td><span class="status-tag tag-green">โพสต์แล้ว</span></td>
-        <td class="td-date">10/3/2026</td>
-      </tr>
-      <tr>
-        <td class="td-project">Influvation</td>
-        <td>ตอน 1.2 — Low Carbon NAC2026 (วันงาน)</td>
-        <td><span class="status-tag tag-amber">รอเสนอแผน</span></td>
-        <td class="td-date">—</td>
-      </tr>
-      <tr>
-        <td class="td-project">Influvation</td>
-        <td>ตอน 2 — Adaptive Education Platform</td>
-        <td><span class="status-tag tag-amber">เสนอรูปแบบงาน</span></td>
-        <td class="td-date">มิ.ย. 2026</td>
-      </tr>
-      <tr>
-        <td class="td-project">Influvation</td>
-        <td>ตอน 3 — นวัตกรรมเกษตร 4 ภาค</td>
-        <td><span class="status-tag tag-amber">เสนอ KOL</span></td>
-        <td class="td-date">—</td>
-      </tr>
+      <tr><td>Tech Now</td><td>ตอน 1 — PM 2.5 สวทช.</td><td><span class="status-tag tag-green">เผยแพร่แล้ว</span></td><td>11/3/2026</td></tr>
+      <tr><td>Tech Now</td><td>ตอน 2 — Low Carbon (Product)</td><td><span class="status-tag tag-amber">ส่งตรวจออกแบบ</span></td><td>—</td></tr>
+      <tr><td>Tech Now</td><td>ตอน 3 — Low Carbon (Non-Product)</td><td><span class="status-tag tag-amber">กำลังดำเนินการ</span></td><td>—</td></tr>
+      <tr><td>Tech Now</td><td>ตอน 4 — สุขภาพ</td><td><span class="status-tag tag-gray">ยังไม่เริ่ม</span></td><td>—</td></tr>
+      <tr><td>Tech Now</td><td>ตอน 5 — สัตว์เลี้ยง</td><td><span class="status-tag tag-gray">ยังไม่เริ่ม</span></td><td>—</td></tr>
+      <tr><td>Influvation</td><td>ตอน 1.1 — NAC แถลงข่าว</td><td><span class="status-tag tag-green">โพสต์แล้ว</span></td><td>10/3/2026</td></tr>
     </tbody>
   </table>
 </div>
 
-<div class="footer">RCS Project Tracker · อัปเดต 14/3/2026</div>
+<div class="footer" style="margin-top: 30px; text-align: center; font-size: 12px; color: #888;">
+  RCS Project Tracker · อัปเดต 14/3/2026
+</div>
 
-<button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" 
-        style="position: fixed; bottom: 20px; right: 20px; padding: 10px 15px; background: #2d3436; color: white; border: none; border-radius: 50px; cursor: pointer; box-shadow: 0 2px 10px rgba(0,0,0,0.2);">
-    ↑ กลับขึ้นบน
+<button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" style="position: fixed; bottom: 20px; right: 20px; padding: 10px 15px; background: #2d3436; color: white; border: none; border-radius: 50px; cursor: pointer;">
+  ↑ กลับขึ้นบน
 </button>
 
 </body>
