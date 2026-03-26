@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>RCS Project Tracker - Updated Layout</title>
+<title>RCS Project Tracker - Full Update</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600&display=swap');
   html { font-size: 150%; }
@@ -75,8 +75,6 @@
   thead th { padding: 9px 18px; text-align: left; font-size: 11px; font-weight: 500; color: var(--text-muted); border-bottom: 1px solid var(--border); background: var(--surface2); }
   tbody tr { border-bottom: 1px solid var(--border); transition: background 0.1s; }
   td { padding: 9px 18px; font-size: 12.5px; vertical-align: middle; }
-  .td-project { color: var(--text-muted); font-size: 11px; }
-  .td-date { color: var(--text-muted); font-size: 11px; white-space: nowrap; }
   .status-tag { display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; border-radius: 10px; font-size: 11px; font-weight: 500; }
   .tag-green { background: var(--green-bg); color: var(--green); }
   .tag-amber { background: var(--amber-bg); color: var(--amber); }
@@ -165,41 +163,69 @@
         <div class="item-body">
           <div class="item-title">ตอน 1 — PM 2.5 สวทช.</div>
           <div class="item-status status-green">เผยแพร่แล้ว 11/3/2026</div>
+          
+          <div style="margin-top: 15px; font-family: sans-serif; font-size: 0.85em;">
+            <p style="font-weight: bold; color: #333; margin-bottom: 8px;">🔗 รายการลิงก์ข่าวประชาสัมพันธ์:</p>
+            
+            <details style="margin-bottom: 5px; border: 1px solid #e0e0e0; border-radius: 5px; padding: 5px;">
+              <summary style="cursor: pointer; font-weight: bold; color: #2e7d32; font-size: 1.1em;">กลุ่มที่ 1: สำนักข่าวหลักและสื่อกระแสหลัก (3)</summary>
+              <ul style="margin: 5px 0; padding-left: 20px;">
+                <li><a href="https://www.matichon.co.th/local/quality-life/news_5629822" target="_blank">Matichon</a></li>
+                <li><a href="https://backbone.mcot.net/backbone/th/news/list/148148" target="_blank">MCOT Backbone</a></li>
+                <li><a href="https://vnnthailand.com/27747/" target="_blank">VNN Thailand</a></li>
+              </ul>
+            </details>
+
+            <details style="margin-bottom: 5px; border: 1px solid #e0e0e0; border-radius: 5px; padding: 5px;">
+              <summary style="cursor: pointer; font-weight: bold; color: #1565c0; font-size: 1.1em;">กลุ่มที่ 2: สื่อเฉพาะทางธุรกิจ นวัตกรรม (5)</summary>
+              <ul style="margin: 5px 0; padding-left: 20px;">
+                <li><a href="https://thaibizvision.com/archives/36198" target="_blank">Thai Biz Vision</a></li>
+                <li><a href="https://www.innolifethailand.com/?p=41319" target="_blank">Innolife Thailand</a></li>
+                <li><a href="https://www.bizfocusnews.com/2026/03/7-pm25.html" target="_blank">Biz Focus News</a></li>
+                <li><a href="https://www.education4plus.com/2026/03/news-169/" target="_blank">Education 4 Plus</a></li>
+                <li><a href="https://www.innewsthailand.com/?p=62673" target="_blank">In News Thailand</a></li>
+              </ul>
+            </details>
+
+            <details style="margin-bottom: 5px; border: 1px solid #e0e0e0; border-radius: 5px; padding: 5px;">
+              <summary style="cursor: pointer; font-weight: bold; color: #ef6c00; font-size: 1.1em;">กลุ่มที่ 3: เว็บไซต์ข่าวทั่วไปและข่าวกิจกรรม (12)</summary>
+              <ul style="margin: 5px 0; padding-left: 20px; font-size: 0.9em;">
+                <li><a href="http://siamevent.com/all-event/?p=235553" target="_blank">Siam Event</a></li>
+                <li><a href="https://www.thinsiam.com/archives/229290" target="_blank">Thin Siam</a></li>
+                <li><a href="https://lifeandsciencenews.com/?p=33463" target="_blank">Life and Science News</a></li>
+                <li><a href="https://www.newsalive.net/education-research/science/news-665/" target="_blank">News Alive</a></li>
+                <li><a href="http://www.highlighthotnews.com/2026/03/7-pm25.html" target="_blank">Highlight Hot News</a></li>
+                <li><a href="https://www.asiannewschannel1.com/?p=45819" target="_blank">Asian News Channel 1</a></li>
+                <li><a href="https://www.hilightdd.com/news/4045" target="_blank">Hilight DD</a></li>
+                <li><a href="https://www.aseanallnews.com/2026/03/7-pm25.html?m=1" target="_blank">ASEAN All News</a></li>
+                <li><a href="https://www.thailandtimes.net/2026/03/7-pm25.html" target="_blank">Thailand Times</a></li>
+                <li><a href="http://www.tourfamuangthai.com/2026/03/7-pm25.html" target="_blank">Tour Fa Muang Thai</a></li>
+                <li><a href="http://www.patiewtourthai.com/2026/03/7-pm25.html" target="_blank">Pa Tiew Tour Thai</a></li>
+                <li><a href="https://www.bizthaipost.com/2026/03/5-food-ray-genius.html?m=1" target="_blank">Biz Thai Post</a></li>
+              </ul>
+            </details>
+
+            <details style="margin-bottom: 5px; border: 1px solid #e0e0e0; border-radius: 5px; padding: 5px;">
+              <summary style="cursor: pointer; font-weight: bold; color: #7b1fa2; font-size: 1.1em;">กลุ่มที่ 4: เครือข่ายข่าวทางเลือก (8)</summary>
+              <ul style="margin: 5px 0; padding-left: 20px; font-size: 0.9em;">
+                <li><a href="https://warasarnthai.blogspot.com/2026/03/7-pm25.html" target="_blank">Warasarn Thai</a></li>
+                <li><a href="https://khaoqnewss.blogspot.com/2026/03/7-pm25.html" target="_blank">Khao Q News</a></li>
+                <li><a href="https://siam-news-time.blogspot.com/2026/03/7-pm25.html" target="_blank">Siam News Time</a></li>
+                <li><a href="https://subjectofnews.blogspot.com/2026/03/7-pm25.html" target="_blank">Subject of News</a></li>
+                <li><a href="https://thailandnewbiz.blogspot.com/2026/03/7-pm25.html" target="_blank">Thailand New Biz</a></li>
+                <li><a href="https://saimupdatenews.blogspot.com/2026/03/7-pm25.html" target="_blank">Siam Update News</a></li>
+                <li><a href="https://bangkokmediazone.blogspot.com/2026/03/7-pm25.html" target="_blank">Bangkok Media Zone</a></li>
+                <li><a href="https://tantukkhao.blogspot.com/2026/03/7-pm25.html" target="_blank">Tan Tuk Khao</a></li>
+              </ul>
+            </details>
+          </div>
         </div>
         <span class="item-badge badge-green">Done</span>
       </div>
-      <div class="item">
-        <div class="item-dot dot-amber"></div>
-        <div class="item-body">
-          <div class="item-title">ตอน 2 — Low Carbon (Product)</div>
-          <div class="item-status status-amber">ปรับแก้คอนเทนต์และกราฟิก</div>
-        </div>
-        <span class="item-badge badge-amber">WIP</span>
-      </div>
-      <div class="item">
-        <div class="item-dot dot-amber"></div>
-        <div class="item-body">
-          <div class="item-title">ตอน 3 — Low Carbon และ Carbon Neutrality (Non-Product)</div>
-          <div class="item-status status-amber">กำลังดำเนินการ</div>
-        </div>
-        <span class="item-badge badge-amber">WIP</span>
-      </div>
-      <div class="item">
-        <div class="item-dot dot-gray"></div>
-        <div class="item-body">
-          <div class="item-title">ตอน 4 — สุขภาพ</div>
-          <div class="item-status status-gray">ยังไม่ดำเนินการ</div>
-        </div>
-        <span class="item-badge badge-gray">Todo</span>
-      </div>
-      <div class="item">
-        <div class="item-dot dot-gray"></div>
-        <div class="item-body">
-          <div class="item-title">ตอน 5 — สัตว์เลี้ยง</div>
-          <div class="item-status status-gray">ยังไม่ดำเนินการ</div>
-        </div>
-        <span class="item-badge badge-gray">Todo</span>
-      </div>
+      <div class="item"><div class="item-dot dot-amber"></div><div class="item-body"><div class="item-title">ตอน 2 — Low Carbon (Product)</div><div class="item-status status-amber">ปรับแก้คอนเทนต์และกราฟิก</div></div><span class="item-badge badge-amber">WIP</span></div>
+      <div class="item"><div class="item-dot dot-amber"></div><div class="item-body"><div class="item-title">ตอน 3 — Low Carbon (Non-Product)</div><div class="item-status status-amber">กำลังดำเนินการ</div></div><span class="item-badge badge-amber">WIP</span></div>
+      <div class="item"><div class="item-dot dot-gray"></div><div class="item-body"><div class="item-title">ตอน 4 — สุขภาพ</div><div class="item-status status-gray">ยังไม่ดำเนินการ</div></div><span class="item-badge badge-gray">Todo</span></div>
+      <div class="item"><div class="item-dot dot-gray"></div><div class="item-body"><div class="item-title">ตอน 5 — สัตว์เลี้ยง</div><div class="item-status status-gray">ยังไม่ดำเนินการ</div></div><span class="item-badge badge-gray">Todo</span></div>
     </div>
   </div>
 </div>
@@ -220,10 +246,9 @@
       <tr><td>Influvation</td><td>ตอน 1.2 — NAC วันงาน</td><td><span class="status-tag tag-amber">รอเสนอแผน</span></td><td>—</td></tr>
       <tr><td>Influvation</td><td>ตอน 2 — Education Platform</td><td><span class="status-tag tag-amber">เสนอรูปแบบ</span></td><td>มิ.ย. 2026</td></tr>
       <tr><td>Influvation</td><td>ตอน 3 — นวัตกรรมเกษตร 4 ภาค</td><td><span class="status-tag tag-amber">เสนอ KOL</span></td><td>—</td></tr>
-      
       <tr><td>Tech Now</td><td>ตอน 1 — PM 2.5 สวทช.</td><td><span class="status-tag tag-green">เผยแพร่แล้ว</span></td><td>11/3/2026</td></tr>
-      <tr><td>Tech Now</td><td>ตอน 2 — Low Carbon (Product)</td><td><span class="status-tag tag-amber">ปรับแก้คอนเทนต์และกราฟิก</span></td><td>—</td></tr>
-      <tr><td>Tech Now</td><td>ตอน 3 — Low Carbon (Non-Product)</td><td><span class="status-tag tag-amber">ติดตามข้อมูลจากศูนย์</span></td><td>—</td></tr>
+      <tr><td>Tech Now</td><td>ตอน 2 — Low Carbon (Product)</td><td><span class="status-tag tag-amber">ปรับแก้คอนเทนต์</span></td><td>—</td></tr>
+      <tr><td>Tech Now</td><td>ตอน 3 — Low Carbon (Non-Product)</td><td><span class="status-tag tag-amber">ติดตามข้อมูล</span></td><td>—</td></tr>
       <tr><td>Tech Now</td><td>ตอน 4 — สุขภาพ</td><td><span class="status-tag tag-gray">ยังไม่เริ่ม</span></td><td>—</td></tr>
       <tr><td>Tech Now</td><td>ตอน 5 — สัตว์เลี้ยง</td><td><span class="status-tag tag-gray">ยังไม่เริ่ม</span></td><td>—</td></tr>
     </tbody>
